@@ -86,7 +86,7 @@ namespace ShiftJisDecoder
             string out_path = dict + "/" + out_filename + ext;
             out_path = getEnableFilename(out_path);
 
-            if (deal_text && ".txt .ini .html .js".Contains(ext))
+            if (deal_text && text_types.Contains(ext))
             {
                 // decoding content text
 
@@ -112,8 +112,22 @@ namespace ShiftJisDecoder
             }
         }
 
+        private string[] text_types;
+        private void readConfig()
+        {
+            string filename = "config.ini";
+            if (!File.Exists(filename))
+            {
+                var f = File.Create(filename);
+                f.Dispose();
+                File.WriteAllLines(filename, new string[] { ".txt", ".ini", ".html", ".js" });
+            }
+            text_types = File.ReadAllLines(filename, Encoding.UTF8);
+        }
+
         private void dealFiles(string[] files,string dict)
         {
+            readConfig();
             bool deal_dir = checkBox1.Checked;
             
 

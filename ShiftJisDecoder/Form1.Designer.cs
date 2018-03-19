@@ -108,9 +108,9 @@
             this.checkBox2.Location = new System.Drawing.Point(12, 95);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.checkBox2.Size = new System.Drawing.Size(245, 19);
+            this.checkBox2.Size = new System.Drawing.Size(289, 19);
             this.checkBox2.TabIndex = 6;
-            this.checkBox2.Text = "处理文本内容（txt,ini,html）";
+            this.checkBox2.Text = "处理文本内容（config.ini指定格式）";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
             // label4

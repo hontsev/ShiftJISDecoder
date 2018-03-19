@@ -1,3 +1,5 @@
 /ShiftJisDecoder/obj
 /ShiftJisDecoder/bin/Debug
 /ShiftJisDecoder/*.csproj
+/.vs
+/ShiftJisDecoder/bin
