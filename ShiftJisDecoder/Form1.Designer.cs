@@ -36,6 +36,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -63,17 +64,18 @@
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(162, 164);
+            this.textBox2.MaxLength = 9999999;
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
             this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.textBox2.Size = new System.Drawing.Size(116, 164);
             this.textBox2.TabIndex = 2;
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(134, 230);
+            this.label2.Location = new System.Drawing.Point(133, 198);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(23, 15);
             this.label2.TabIndex = 3;
@@ -118,16 +120,26 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(13, 146);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(187, 15);
+            this.label4.Size = new System.Drawing.Size(202, 15);
             this.label4.TabIndex = 7;
-            this.label4.Text = "下面可以粘贴乱码转成日文";
+            this.label4.Text = "下面可以粘贴乱码和日文互转";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(133, 260);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(23, 15);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "<<";
             // 
             // Form1
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(290, 340);
+            this.ClientSize = new System.Drawing.Size(305, 340);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.label3);
@@ -157,6 +169,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
     }
 }
 

@@ -162,10 +162,10 @@ namespace ShiftJisDecoder
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            var badstringFromDatabase = textBox1.Text;
-            var hopefullyRecovered = Encoding.GetEncoding("gb2312").GetBytes(badstringFromDatabase);
+            var badstring = textBox1.Text;
+            var hopefullyRecovered = Encoding.GetEncoding("gb2312").GetBytes(badstring);
             var oughtToBeJapanese = Encoding.GetEncoding(932).GetString(hopefullyRecovered);
-            textBox2.Text = oughtToBeJapanese;
+            if (textBox2.Text != oughtToBeJapanese) textBox2.Text = oughtToBeJapanese;
         }
 
         private void Form1_DragDrop(object sender, DragEventArgs e)
@@ -194,6 +194,15 @@ namespace ShiftJisDecoder
             {
                 e.Effect = DragDropEffects.None;
             }
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            var jpstring = textBox2.Text;
+            var hopefullyRecovered = Encoding.GetEncoding(932).GetBytes(jpstring);
+            var badstr = Encoding.GetEncoding("gb2312").GetString(hopefullyRecovered);
+            if(textBox1.Text!=badstr)textBox1.Text = badstr;
+
         }
     }
 }
