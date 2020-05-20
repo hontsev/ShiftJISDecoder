@@ -74,6 +74,8 @@ namespace ShiftJisDecoder
 
         private void dealOneFile(string path,string dict)
         {
+            backgroundWorker1.ReportProgress(1);
+            //progressBar1.Value += 1;
             bool deal_text = checkBox2.Checked;
 
             //print("load:" + path);
@@ -175,13 +177,43 @@ namespace ShiftJisDecoder
                 string[] s = (string[])e.Data.GetData(DataFormats.FileDrop, false);
                 if (s.Length > 0)
                 {
-                    dealFiles(s,null);
+                    AllowDrop = false;
+                    progressBar1.Value = 0;
+                    int filenum = 0;
+                    foreach (var file in s) filenum += Directory.GetFiles(file, "*.*", SearchOption.AllDirectories).Length;
+                    progressBar1.Maximum = filenum;
+                    backgroundWorker1.DoWork += workDealFiles;
+                    backgroundWorker1.RunWorkerAsync((object)s);
+                    //dealFiles(s,null);
                 }
             }
             catch (Exception ex)
             {
                 //print(ex.Message);
+                AllowDrop = true;
             }
+            finally
+            {
+                
+            }
+        }
+
+        private void workDealFiles(object sender, DoWorkEventArgs e)
+        {
+            string[] s = (string[])e.Argument;
+            //progressBar1.Maximum = s.Length;
+            
+            try
+            {
+                dealFiles(s, null);
+                //backgroundWorker1.ReportProgress(progressBar1.Maximum);
+                //progressBar1.Value = progressBar1.Maximum;
+            }
+            catch(Exception ex)
+            {
+                
+            }
+            
         }
 
         private void Form1_DragEnter(object sender, DragEventArgs e)
@@ -203,6 +235,16 @@ namespace ShiftJisDecoder
             var badstr = Encoding.GetEncoding("gb2312").GetString(hopefullyRecovered);
             if(textBox1.Text!=badstr)textBox1.Text = badstr;
 
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar1.Value = Math.Min(progressBar1.Maximum, progressBar1.Value + (int)(e.ProgressPercentage));
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            AllowDrop = true;
         }
     }
 }
